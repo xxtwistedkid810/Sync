@@ -1,0 +1,12 @@
+[Unit]
+Description=larper.cc-auth git sync every 5 seconds
+Requires=larper-sync.service
+
+[Timer]
+OnBootSec=15s
+OnUnitActiveSec=5s
+AccuracySec=1s
+Unit=larper-sync.service
+
+[Install]
+WantedBy=timers.target

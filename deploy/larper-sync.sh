@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Pull latest from GitHub into the live web root (runs every 5s via systemd timer).
+
+set -euo pipefail
+
+SITE_DIR="${SITE_DIR:-/var/www/larper.cc-auth}"
+BRANCH="${BRANCH:-main}"
+LOG_TAG="larper-sync"
+
+cd "$SITE_DIR"
+
+git fetch --quiet origin "$BRANCH"
+LOCAL=$(git rev-parse "$BRANCH")
+REMOTE=$(git rev-parse "origin/$BRANCH")
+
+if [ "$LOCAL" != "$REMOTE" ]; then
+    logger -t "$LOG_TAG" "syncing $LOCAL -> $REMOTE"
+    git reset --hard "origin/$BRANCH" --quiet
+    git clean -fd --quiet
+fi

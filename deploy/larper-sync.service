@@ -1,0 +1,16 @@
+[Unit]
+Description=larper.cc-auth git sync (one-shot)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/var/www/larper.cc-auth
+ExecStart=/var/www/larper.cc-auth/deploy/larper-sync.sh
+Nice=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
