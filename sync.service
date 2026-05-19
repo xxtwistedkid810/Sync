@@ -6,8 +6,8 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 User=root
-WorkingDirectory=/var/www/Sync
-ExecStart=/var/www/Sync/deploy/sync.sh
+WorkingDirectory=/var/www
+ExecStart=/var/www/sync.sh
 Nice=10
 StandardOutput=journal
 StandardError=journal

@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-SITE_DIR="${SITE_DIR:-/var/www/Sync}"
+SITE_DIR="${SITE_DIR:-/var/www}"
 BRANCH="${BRANCH:-main}"
 LOG_TAG="sync"
 

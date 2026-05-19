@@ -3,16 +3,15 @@
 
 set -euo pipefail
 
-SITE_DIR="${SITE_DIR:-/var/www/Sync}"
+SITE_DIR="${SITE_DIR:-/var/www}"
 REPO_URL="${REPO_URL:-https://github.com/xxtwistedkid810/Sync.git}"
 BRANCH="${BRANCH:-main}"
 
 if [ "$(id -u)" -ne 0 ]; then
-    echo "Run as root: sudo bash deploy/install-sync.sh"
+    echo "Run as root: sudo bash /var/www/install-sync.sh"
     exit 1
 fi
 
-# Remove old larper.cc-auth timer if present
 systemctl disable --now larper-sync.timer 2>/dev/null || true
 rm -f /etc/systemd/system/larper-sync.service /etc/systemd/system/larper-sync.timer
 
@@ -27,11 +26,11 @@ else
     git clean -fd
 fi
 
-chmod +x "$SITE_DIR/deploy/sync.sh"
-chmod +x "$SITE_DIR/deploy/install-sync.sh"
+chmod +x "$SITE_DIR/sync.sh"
+chmod +x "$SITE_DIR/install-sync.sh"
 
-cp "$SITE_DIR/deploy/sync.service" /etc/systemd/system/sync.service
-cp "$SITE_DIR/deploy/sync.timer" /etc/systemd/system/sync.timer
+cp "$SITE_DIR/sync.service" /etc/systemd/system/sync.service
+cp "$SITE_DIR/sync.timer" /etc/systemd/system/sync.timer
 
 systemctl daemon-reload
 systemctl enable --now sync.timer
@@ -39,4 +38,4 @@ systemctl start sync.service
 
 echo "Installed. Status:"
 systemctl status sync.timer --no-pager || true
-echo "Sync runs every 5 seconds."
+echo "Sync runs every 5 seconds into $SITE_DIR"
