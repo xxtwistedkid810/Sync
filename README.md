@@ -1,19 +1,15 @@
-# larper.cc-auth
+# Sync
 
-Deployment target for **larper.cc** (VPS auto-sync from this repo).
+VPS auto-sync from GitHub every **5 seconds**.
 
-This repository is intentionally minimal. Application code is deployed elsewhere or added later.
-
-## VPS auto-sync (every 5 seconds)
-
-On the server (once):
+## Install on server (once)
 
 ```bash
-sudo bash /var/www/larper.cc-auth/deploy/install-sync.sh
+sudo bash /var/www/Sync/deploy/install-sync.sh
 ```
 
-Manual pull:
+## Manual pull
 
 ```bash
-cd /var/www/larper.cc-auth && git pull origin main
+cd /var/www/Sync && git pull origin main
 ```

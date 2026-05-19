@@ -1,3 +1,1 @@
-includes/credentials.php
-includes/redis.php
 .env
